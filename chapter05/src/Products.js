@@ -1,7 +1,7 @@
 import React from 'react';
 import Product from './Product';
 
-function Products () {
+function Products() {
   const getProducts = () => {
     return [
       {
@@ -43,7 +43,12 @@ function Products () {
   );
   return (
     <div>
-      <ul>{listProducts}</ul>
+      {listProducts.length > 0 &&
+        <ul>{listProducts}</ul>
+      }
+      {listProducts.length == 0 &&
+        <ul>No products to display</ul>
+      }
     </div>
   );
 }
