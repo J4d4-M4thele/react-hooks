@@ -81,6 +81,10 @@ function Quiz() {
             setAnimal('');
             setAnimalError('');
         }
+
+        if(correctFlower && correctBird && correctAnimal && correctFish && correctTree) {
+            handleShowModal();
+        }
     };
 
     const handleShowModal = () => {
