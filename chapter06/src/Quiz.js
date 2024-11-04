@@ -31,7 +31,7 @@ function Quiz() {
     const [animalError, setAnimalError] = useState('');
 
     //modal state
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
 
     //validation
     const handleSubmit = (e) => {
@@ -83,17 +83,18 @@ function Quiz() {
         }
 
         if(correctFlower && correctBird && correctAnimal && correctFish && correctTree) {
-            handleShowModal();
+            // handleShowModal();
+            alert("Well done!!! You know your National Symbols!");
         }
     };
 
-    const handleShowModal = () => {
-        setShowModal(true);
-    };
+    // const handleShowModal = () => {
+    //     setShowModal(true);
+    // };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
+    // const handleCloseModal = () => {
+    //     setShowModal(false);
+    // };
 
     return (
         <div>
@@ -198,7 +199,7 @@ function Quiz() {
                     Submit
                 </Button>
             </Form>
-            <Modal
+            {/* <Modal
                 open={showModal}
                 onClose={handleCloseModal}
                 aria-labelledby="modal-modal-title"
@@ -209,7 +210,7 @@ function Quiz() {
                         Well done!!! You know your National Symbols!
                     </Typography>
                 </Box>
-            </Modal>
+            </Modal> */}
         </div>
     );
 }
