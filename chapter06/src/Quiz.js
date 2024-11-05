@@ -195,7 +195,7 @@ function Quiz() {
                     }
                 </FormControl>
 
-                <Button variant="primary" type="submit" onClick={handleShowModal}>
+                <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
