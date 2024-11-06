@@ -1,6 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TodosContext } from './App';
 import { Table, Form, Button } from 'react-bootstrap';
+import useAPI from './useAPI';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 function ToDoList() {
     const { state, dispatch } = useContext(TodosContext);
@@ -9,14 +12,24 @@ function ToDoList() {
     const [editTodo, setEditTodo] = useState(null)
     const buttonTitle = editMode ? "Edit" : "Add";
 
-    function handleSubmit(event) {
+    const endpoint = 'http://localhost:3000/todos/';
+    const savedTodos = useAPI(endpoint);
+
+    useEffect(() => {
+        //gets data from todos.json endpoint
+        dispatch({ type: 'get', payload: savedTodos })
+    }, [savedTodos])
+
+    async function handleSubmit(event) {
         event.preventDefault();
         if (editMode) {
             dispatch({ type: 'edit', payload: { ...editTodo, text: todoText } })
             setEditMode(false)
             setEditTodo(null)
-        }else {
-            dispatch({ type: 'add', payload: todoText });
+        } else {
+            const newToDo = {id: uuidv4(), text: todoText}
+            const response = await axios.post(endpoint, newToDo)
+            dispatch({ type: 'add', payload: newToDo });
         }
         setTodoText(''); // to clear field after adding
     }
@@ -56,9 +69,11 @@ function ToDoList() {
                                 }}
                             >Edit</td>
                             <td
-                                onClick={() =>
+                                onClick={async () => {
+                                    //find and deleteById
+                                    await axios.delete(endpoint + todo.id)
                                     dispatch({ type: 'delete', payload: todo })
-                                }
+                                }}
                             >Delete</td>
                         </tr>
                     ))}
