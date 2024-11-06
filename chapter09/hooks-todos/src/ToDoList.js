@@ -23,6 +23,8 @@ function ToDoList() {
     async function handleSubmit(event) {
         event.preventDefault();
         if (editMode) {
+            //finding todo by id and updating
+            await axios.patch(endpoint + editTodo.id, {text:todoText})
             dispatch({ type: 'edit', payload: { ...editTodo, text: todoText } })
             setEditMode(false)
             setEditTodo(null)
@@ -67,14 +69,18 @@ function ToDoList() {
                                     setEditMode(true)
                                     setEditTodo(todo)
                                 }}
-                            >Edit</td>
+                            >
+                                <Button variant='link'>Edit</Button>
+                            </td>
                             <td
                                 onClick={async () => {
                                     //find and deleteById
                                     await axios.delete(endpoint + todo.id)
                                     dispatch({ type: 'delete', payload: todo })
                                 }}
-                            >Delete</td>
+                            >
+                                <Button variant='link'>Delete</Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
