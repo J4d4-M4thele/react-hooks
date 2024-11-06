@@ -1,0 +1,16 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "text": "Finish React Hooks Book"
+        },
+        {
+            "id": 2,
+            "text": "Do 1 hour Cardio"
+        },
+        {
+            "id": 3,
+            "text": "Read Bible"
+        }
+    ]
+}
